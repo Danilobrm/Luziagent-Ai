@@ -1,0 +1,24 @@
+{
+  "name": "neozap-ai",
+  "version": "1.0.0",
+  "description": "A simple AI application using Node.js",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "build": "tsc",
+    "dev": "ts-node-dev --env-file=.env --respawn --transpile-only src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/username/neozap-ai.git"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.2.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
