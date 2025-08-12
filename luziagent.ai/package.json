@@ -1,5 +1,5 @@
 {
-  "name": "neozap-ai",
+  "name": "luziagent-ai",
   "version": "1.0.0",
   "description": "A simple AI application using Node.js",
   "main": "src/index.js",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/username/neozap-ai.git"
+    "url": "https://github.com/username/Luziagent-Ai.git"
   },
   "devDependencies": {
     "@types/express": "^5.0.3",
@@ -19,6 +19,7 @@
     "typescript": "^5.9.2"
   },
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "openai": "^5.12.2"
   }
 }
