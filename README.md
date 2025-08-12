@@ -1,2 +1,2 @@
-# NeoZap-AI
-NeoZap AI — The next generation of chat service
+# Luziagent-Ai
+Luziagent Ai — The next generation of chat service
