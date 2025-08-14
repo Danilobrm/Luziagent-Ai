@@ -1,5 +1,5 @@
-import { ChatCompletionMessageParam } from "openai/resources/index";
 import OpenAI from "openai";
+import { ChatCompletionMessageParam } from "openai/resources/index";
 import { Agent } from "../../modules/Ai/interfaces/agents.interface";
 
 const openai = new OpenAI({
@@ -7,16 +7,6 @@ const openai = new OpenAI({
 });
 
 const conversations: { [key: number]: ChatCompletionMessageParam[] } = {};
-
-export const trainAgent = async (id: number, instructions: string[]): Promise<void> => {
-  try {
-    console.log("Training agent...");
-    // agent.instructions.push(...instructions);
-  } catch (error) {
-    console.error("Error training agent:", error);
-    throw error;
-  }
-};
 
 export const talkToAgent = async (user_id: number, agent: Agent, message: string): Promise<any> => {
   if (!conversations[user_id]) {
@@ -27,17 +17,45 @@ export const talkToAgent = async (user_id: number, agent: Agent, message: string
 
   const messages = [...conversations[user_id]];
 
-  console.log(messages);
-
   try {
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       messages,
       temperature: 0,
+      tools: agent.tools,
+      tool_choice: "auto",
     });
 
-    const reply = completion.choices[0].message.content as string;
+    const message = completion.choices[0].message;
 
+    //     if (message.tool_calls) {
+    //       for (const call of message.tool_calls) {
+    //         if (call.function.name === "getAllProducts") {
+    //           const products = await getAllProducts();
+    //
+    //           if (products.length === 0) {
+    //             return "Nenhum produto encontrado.";
+    //           }
+    //
+    //           const final = await openai.chat.completions.create({
+    //             model: "gpt-4o-mini",
+    //             messages: [
+    //               ...messages,
+    //               message,
+    //               {
+    //                 role: "tool",
+    //                 tool_call_id: call.id,
+    //                 content: JSON.stringify(products),
+    //               },
+    //             ],
+    //           });
+    //
+    //           return final.choices[0].message.content;
+    //         }
+    //       }
+    //     }
+
+    const reply = message.content as string;
     conversations[user_id].push({ role: "assistant", content: reply });
 
     return reply;
