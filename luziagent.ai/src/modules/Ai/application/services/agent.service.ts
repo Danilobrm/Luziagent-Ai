@@ -1,11 +1,14 @@
-import { ChatCompletionMessageParam } from "openai/resources/index";
+import { ChatCompletionMessageParam, ChatCompletionTool } from "openai/resources/index";
 import { Agent } from "../../interfaces/agents.interface";
 import { agents, createAgentRepository, findAgentById, getAllAgentsRepository } from "../repositories/agent.repository";
 import { AgentDto } from "../../dtos/agents.dto";
 import { talkToAgent } from "../../../../infrastructure/ai/openai";
 
 export const createAgentService = async (name: string, instructions: ChatCompletionMessageParam[]): Promise<Agent> => {
-  const newAgent = new AgentDto(agents.length + 1, name, instructions);
+  // to be implemented the available tools for the respective agent role
+  // for now, it's just an empty array to show that an agent needs its tools
+  const tools: ChatCompletionTool[] = [];
+  const newAgent = new AgentDto(agents.length + 1, name, instructions, tools);
 
   const agent_record = await createAgentRepository(newAgent);
 
